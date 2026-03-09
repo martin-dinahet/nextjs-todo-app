@@ -2,9 +2,9 @@
 
 import { Lock, Mail, User } from "lucide-react";
 import Link from "next/link";
-import { emailRegisterAction } from "@/actions/auth/email-register-action";
-import { Form } from "@/components/form";
-import { LoginWithGithubButton } from "@/components/login-with-github-button";
+import { emailRegisterAction } from "@/features/auth/email-register-action";
+import { Form } from "@/shared/form";
+import { GithubLoginButton } from "@/widgets/github-login-button";
 
 export default function RegisterPage() {
   return (
@@ -15,7 +15,6 @@ export default function RegisterPage() {
             <h1 className="font-bold text-2xl">Welcome</h1>
             <p className="mt-1 text-base-content/60 text-sm">Create your account</p>
           </div>
-
           <Form.Root action={emailRegisterAction} className="flex flex-col gap-2">
             <Form.Error />
             <Form.Field
@@ -46,7 +45,7 @@ export default function RegisterPage() {
           </Form.Root>
 
           <div className="divider text-base-content/40 text-xs">OR</div>
-          <LoginWithGithubButton />
+          <GithubLoginButton />
           <Link className="btn btn-link btn-block" href="/auth/login">
             Already have an account? Login
           </Link>
