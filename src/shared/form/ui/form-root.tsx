@@ -1,11 +1,11 @@
 "use client";
 
 import { type ReactNode, useActionState, useId } from "react";
-import type { ActionState } from "@/lib/types/action-state";
+import type { Action } from "@/lib/types/action";
 import { FormContext } from "../lib/form-context";
 
 interface Props {
-  action: (prevState: ActionState, formData: FormData) => Promise<ActionState>;
+  action: Action;
   children: ReactNode;
   className?: string;
 }

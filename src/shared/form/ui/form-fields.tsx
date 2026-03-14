@@ -7,5 +7,5 @@ interface Props {
 }
 
 export function FormFields({ children }: Props) {
-  return <fieldset className="fieldset">{children}</fieldset>;
+  return <div className="flex flex-col gap-4">{children}</div>;
 }

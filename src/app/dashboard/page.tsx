@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/db";
 import { getSession } from "@/lib/helpers/get-session";
 import { CreateTodoForm } from "@/widgets/create-todo-form";
@@ -15,12 +16,12 @@ export default async function DashboardPage() {
   const done = todos.filter((t) => t.done).length;
 
   return (
-    <div className="min-h-screen bg-base-100">
+    <div className="min-h-screen">
       <div className="mx-auto flex max-w-xl flex-col gap-8 px-4 py-12">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="font-bold text-2xl">Hello, {session.user.name}!</h1>
-            <p className="mt-1 text-base-content/50 text-sm">
+            <p className="mt-1 text-muted-foreground text-sm">
               {done} of {todos.length} tasks completed
             </p>
           </div>
@@ -29,7 +30,7 @@ export default async function DashboardPage() {
 
         <ul className="flex flex-col gap-2">
           {todos.length === 0 && (
-            <p className="py-8 text-center text-base-content/40 text-sm">
+            <p className="py-8 text-center text-muted-foreground text-sm">
               No todos yet. Add one below!
             </p>
           )}
@@ -38,7 +39,7 @@ export default async function DashboardPage() {
           ))}
         </ul>
 
-        <div className="divider" />
+        <Separator />
 
         <CreateTodoForm />
       </div>

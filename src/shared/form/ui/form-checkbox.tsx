@@ -1,10 +1,12 @@
 "use client";
 
 import { AlertCircle } from "lucide-react";
-import type { InputHTMLAttributes } from "react";
+import type { ComponentPropsWithoutRef } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { useFormContext } from "../lib/form-context";
 
-interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, "form" | "type"> {
+interface Props extends Omit<ComponentPropsWithoutRef<typeof Checkbox>, "form"> {
   label: string;
   name: string;
 }
@@ -16,25 +18,26 @@ export function FormCheckbox({ label, name, ...inputProps }: Props) {
   const errorId = `${formId}${name}-error`;
 
   return (
-    <fieldset className="fieldset">
-      <label className="label cursor-pointer gap-2" htmlFor={inputId}>
-        <input
+    <div className="flex flex-col gap-1.5">
+      <div className="flex items-center gap-2">
+        <Checkbox
           aria-describedby={error ? errorId : undefined}
           aria-invalid={error ? true : undefined}
           disabled={pending}
           id={inputId}
           name={name}
-          type="checkbox"
           {...inputProps}
         />
-        <span>{label}</span>
-      </label>
+        <Label className="cursor-pointer" htmlFor={inputId}>
+          {label}
+        </Label>
+      </div>
       {error && (
-        <p className="label flex items-center gap-1 text-error" id={errorId} role="alert">
+        <p className="flex items-center gap-1 text-destructive text-sm" id={errorId} role="alert">
           <AlertCircle className="h-3.5 w-3.5 shrink-0" />
           {error}
         </p>
       )}
-    </fieldset>
+    </div>
   );
 }

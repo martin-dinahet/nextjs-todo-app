@@ -6,11 +6,11 @@ import { Form } from "@/shared/form";
 
 export function CreateTodoForm() {
   return (
-    <Form action={createTodoAction}>
+    <Form action={createTodoAction} className="flex flex-col gap-2">
       <Form.Error />
       <Form.Field
         icon={<Pen className="h-4 w-4" />}
-        legend="Title"
+        label="Title"
         name="title"
         placeholder="Do the dishes"
         required

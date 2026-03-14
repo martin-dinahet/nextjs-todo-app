@@ -1,6 +1,9 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import type { ReactNode } from "react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { useFormContext } from "../lib/form-context";
 
 interface Props {
@@ -10,14 +13,15 @@ interface Props {
 
 export function FormSubmit({ children, className }: Props) {
   const { pending } = useFormContext();
+
   return (
-    <button
+    <Button
       aria-disabled={pending}
-      className={`btn btn-primary btn-block ${className ?? ""}`}
+      className={cn("w-full", className)}
       disabled={pending}
       type="submit"
     >
-      {pending ? <span className="loading loading-spinner loading-sm" /> : children}
-    </button>
+      {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : children}
+    </Button>
   );
 }

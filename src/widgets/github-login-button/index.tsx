@@ -1,7 +1,8 @@
 "use client";
 
-import { GithubIcon } from "lucide-react";
+import { GithubIcon, Loader2 } from "lucide-react";
 import { useTransition } from "react";
+import { Button } from "@/components/ui/button";
 import { socialLoginMutation } from "@/features/auth";
 import { handle } from "@/lib/helpers/handle";
 
@@ -15,20 +16,21 @@ export function GithubLoginButton() {
   }
 
   return (
-    <button
-      className="btn btn-active btn-block"
+    <Button
+      className="w-full"
       disabled={pending}
       onClick={handleClick}
       type="button"
+      variant="outline"
     >
       {pending ? (
-        <span className="loading loading-spinner" />
+        <Loader2 className="h-4 w-4 animate-spin" />
       ) : (
         <>
-          <GithubIcon />
+          <GithubIcon className="h-4 w-4" />
           Login with GitHub
         </>
       )}
-    </button>
+    </Button>
   );
 }
