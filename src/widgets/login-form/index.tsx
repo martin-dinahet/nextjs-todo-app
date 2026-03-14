@@ -2,7 +2,7 @@
 
 import { Lock, Mail } from "lucide-react";
 import Link from "next/link";
-import { emailLoginAction } from "@/features/auth/email-login-action";
+import { emailLoginAction } from "@/features/auth";
 import { Form } from "@/shared/form";
 import { GithubLoginButton } from "../github-login-button";
 

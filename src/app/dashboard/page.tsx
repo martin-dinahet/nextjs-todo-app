@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { getSession } from "@/lib/get-session";
+import { getSession } from "@/lib/helpers/get-session";
 import { CreateTodoForm } from "@/widgets/create-todo-form";
 import { LogoutButton } from "@/widgets/logout-button";
 import { TodoItem } from "@/widgets/todo-item";
@@ -29,7 +29,9 @@ export default async function DashboardPage() {
 
         <ul className="flex flex-col gap-2">
           {todos.length === 0 && (
-            <p className="py-8 text-center text-base-content/40 text-sm">No todos yet. Add one below!</p>
+            <p className="py-8 text-center text-base-content/40 text-sm">
+              No todos yet. Add one below!
+            </p>
           )}
           {todos.map((todo) => (
             <TodoItem key={todo.id} todo={todo} />

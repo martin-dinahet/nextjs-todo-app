@@ -1,14 +1,15 @@
 "use client";
 
 import { useTransition } from "react";
-import { logoutFunction } from "@/features/auth/logout-function";
+import { logoutMutation } from "@/features/auth";
+import { handle } from "@/lib/helpers/handle";
 
 export function LogoutButton() {
   const [pending, startTransition] = useTransition();
 
   function handleClick() {
     startTransition(async () => {
-      await logoutFunction();
+      await handle(logoutMutation());
     });
   }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { Pen } from "lucide-react";
-import { createTodoAction } from "@/features/todo/create-todo-action";
+import { createTodoAction } from "@/features/todo";
 import { Form } from "@/shared/form";
 
 export function CreateTodoForm() {
