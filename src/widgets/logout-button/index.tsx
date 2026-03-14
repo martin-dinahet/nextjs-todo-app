@@ -2,6 +2,7 @@
 
 import { Loader2 } from "lucide-react";
 import { useTransition } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { logoutMutation } from "@/features/auth";
 import { handle } from "@/lib/helpers/handle";
@@ -11,7 +12,12 @@ export function LogoutButton() {
 
   function handleClick() {
     startTransition(async () => {
-      await handle(logoutMutation());
+      const result = await handle(logoutMutation());
+      if (result.error) {
+        toast.error("Failed to logout.");
+        return;
+      }
+      toast.success("Logged out successfully.");
     });
   }
 

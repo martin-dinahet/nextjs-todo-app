@@ -2,6 +2,7 @@
 
 import { Trash } from "lucide-react";
 import { useTransition } from "react";
+import { toast } from "sonner";
 import { deleteTodoMutation, toggleTodoMutation } from "@/features/todo";
 import type { Todo } from "@/generated/client";
 import { handle } from "@/lib/helpers/handle";
@@ -15,13 +16,23 @@ export function TodoItem({ todo }: Props) {
 
   function handleCheck() {
     startTransition(async () => {
-      await handle(toggleTodoMutation(todo.id));
+      const result = await handle(toggleTodoMutation(todo.id));
+      if (result.error) {
+        toast.error("Failed to update todo status.");
+        return;
+      }
+      toast.success("Todo status updated successfully.");
     });
   }
 
   function handleDelete() {
     startTransition(async () => {
-      await handle(deleteTodoMutation(todo.id));
+      const result = await handle(deleteTodoMutation(todo.id));
+      if (result.error) {
+        toast.error("Failed to delete todo.");
+        return;
+      }
+      toast.success("Todo deleted successfully.");
     });
   }
 
