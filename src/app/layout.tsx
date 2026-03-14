@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "@/app/globals.css";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +17,7 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className="antialiased">
         <main>{children}</main>
       </body>
