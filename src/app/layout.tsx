@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
-import "@/app/globals.css";
 import { Geist } from "next/font/google";
+import type { ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/shared/theme-provider";
+import "@/app/globals.css";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -18,10 +20,19 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html className={cn("font-sans", geist.variable)} lang="en">
+    <html className={cn("font-sans", geist.variable)} lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <main>{children}</main>
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          <TooltipProvider>
+            <main>{children}</main>
+            <Toaster />
+          </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

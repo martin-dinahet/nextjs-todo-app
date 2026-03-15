@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import type { ActionState } from "@/lib/types/action-state";
+import type { ActionState } from "@/lib/types/action";
 
 interface FormContextType {
   formId: string;

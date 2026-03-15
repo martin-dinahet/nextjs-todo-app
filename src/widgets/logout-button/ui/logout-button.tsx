@@ -22,7 +22,7 @@ export function LogoutButton() {
   }
 
   return (
-    <Button disabled={pending} onClick={handleClick} type="button">
+    <Button disabled={pending} onClick={handleClick} type="button" variant="outline">
       {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Log out"}
     </Button>
   );

@@ -8,11 +8,13 @@ interface Props {
   action: Action;
   children: ReactNode;
   className?: string;
+  onSuccess?: () => void;
 }
 
-export function FormRoot({ action, children, className }: Props) {
+export function FormRoot({ action, children, className, onSuccess }: Props) {
   const [state, formAction, pending] = useActionState(action, { status: "idle" });
   const formId = useId();
+  if (state.status === "success" && onSuccess) onSuccess();
 
   return (
     <FormContext.Provider value={{ state, pending, formId }}>
