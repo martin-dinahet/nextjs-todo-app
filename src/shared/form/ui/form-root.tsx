@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useActionState, useId } from "react";
+import { type ReactNode, useActionState, useEffect, useId, useRef } from "react";
 import type { Action } from "@/lib/types/action";
 import { FormContext } from "../lib/form-context";
 
@@ -14,7 +14,17 @@ interface Props {
 export function FormRoot({ action, children, className, onSuccess }: Props) {
   const [state, formAction, pending] = useActionState(action, { status: "idle" });
   const formId = useId();
-  if (state.status === "success" && onSuccess) onSuccess();
+  const onSuccessRef = useRef(onSuccess);
+
+  useEffect(() => {
+    onSuccessRef.current = onSuccess;
+  }, [onSuccess]);
+
+  useEffect(() => {
+    if (state.status === "success") {
+      onSuccessRef.current?.();
+    }
+  }, [state]);
 
   return (
     <FormContext.Provider value={{ state, pending, formId }}>
