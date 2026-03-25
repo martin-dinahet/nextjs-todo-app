@@ -3,6 +3,8 @@
 import { Trash } from "lucide-react";
 import { useTransition } from "react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { deleteTodoMutation, toggleTodoMutation } from "@/features/todo";
 import type { Todo } from "@/generated/client";
 import { handle } from "@/lib/helpers/handle";
@@ -42,15 +44,10 @@ export function TodoItem({ todo }: Props) {
         {todo.title}
       </span>
       {pending && <span className="loading loading-spinner" />}
-      <input
-        className="checkbox"
-        defaultChecked={todo.done}
-        onChange={handleCheck}
-        type="checkbox"
-      />
-      <button className="btn-ghost btn-sm" disabled={pending} onClick={handleDelete} type="button">
+      <Checkbox checked={todo.done} className="checkbox" onCheckedChange={handleCheck} />
+      <Button disabled={pending} onClick={handleDelete} size="icon" type="button" variant="ghost">
         <Trash className="h-4 w-4" />
-      </button>
+      </Button>
     </li>
   );
 }
